@@ -1,4 +1,4 @@
-package Moodle;
+package Assignment1;
 
 public class RamanujanNumber {
 
