@@ -14,7 +14,7 @@ public class ReverseDLL {
     private Node head;
     private Node tail;
 
-    public ReverseDLL() {
+    public ReverseDLL(){
         this.head = null;
         this.tail = null;
     }
@@ -31,6 +31,16 @@ public class ReverseDLL {
         }
     }
 
+    public int length() {
+        int length = 0;
+        Node current = head;
+        while (current != null) {
+            length++;
+            current = current.next;
+        }
+        return length;
+    }
+
     public void displayForward() {
         Node current = head;
         while (current != null) {
@@ -40,34 +50,17 @@ public class ReverseDLL {
         System.out.println();
     }
 
-    public void reverse() {
-        Node current = head;
-        Node temp = null;
-
-        while (current != null) {
-            temp = current.prev;
-            current.prev = current.next;
-            current.next = temp;
-            current = current.prev;
-        }
-
-        if (temp != null) {
-            head = temp.prev;
-        }
-    }
-
     public static void main(String[] args) {
         ReverseDLL dll = new ReverseDLL();
         dll.insertAtEnd(10);
         dll.insertAtEnd(20);
         dll.insertAtEnd(30);
+        dll.insertAtEnd(40);
 
         System.out.println("Original doubly linked list:");
         dll.displayForward();
 
-        dll.reverse();
-
-        System.out.println("Reversed doubly linked list:");
-        dll.displayForward();
+        int length = dll.length();
+        System.out.println("Length of the doubly linked list: " + length);
     }
 }
