@@ -1,7 +1,6 @@
 package assignment4;
 
-public class Insertion {
-    
+public class ReverseDLL {
     static class Node {
         int data;
         Node prev;
@@ -15,21 +14,9 @@ public class Insertion {
     private Node head;
     private Node tail;
 
-    public Insertion() {
+    public ReverseDLL() {
         this.head = null;
         this.tail = null;
-    }
-
-    public void insertAtBeginning(int data) {
-        Node newNode = new Node(data);
-        if (head == null) {
-            head = newNode;
-            tail = newNode;
-        } else {
-            newNode.next = head;
-            head.prev = newNode;
-            head = newNode;
-        }
     }
 
     public void insertAtEnd(int data) {
@@ -53,21 +40,34 @@ public class Insertion {
         System.out.println();
     }
 
-    public void displayBackward() {
-        Node current = tail;
+    public void reverse() {
+        Node current = head;
+        Node temp = null;
+
         while (current != null) {
-            System.out.print(current.data + " ");
+            temp = current.prev;
+            current.prev = current.next;
+            current.next = temp;
             current = current.prev;
         }
-        System.out.println();
+
+        if (temp != null) {
+            head = temp.prev;
+        }
     }
 
     public static void main(String[] args) {
-        Insertion dll = new Insertion();
+        ReverseDLL dll = new ReverseDLL();
         dll.insertAtEnd(10);
         dll.insertAtEnd(20);
-        dll.insertAtBeginning(5);
-        dll.displayForward(); 
-        dll.displayBackward();
+        dll.insertAtEnd(30);
+
+        System.out.println("Original doubly linked list:");
+        dll.displayForward();
+
+        dll.reverse();
+
+        System.out.println("Reversed doubly linked list:");
+        dll.displayForward();
     }
 }
